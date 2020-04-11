@@ -6,4 +6,4 @@
 
 * sudo bash recon.sh domain.com
 * sudo bash cache-delete.sh
-* sudo bash destination.sh test (test= name of the directory to save the output files!!)
+* sudo bash destination.sh test ```test= name of the directory to save the output files!!```
