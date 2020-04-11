@@ -1,6 +1,6 @@
-rm /root/recon/ports-domains.txt.gnmap
-rm /root/recon/ports-domains.txt.xml
-rm /root/recon/sub.txt
-rm /root/recon/subdomains.txt
-rm /root/recon/third-stage-sub.txt
-rm /root/recon/final-sub.txt
+rm /root/ports-domains.txt.gnmap
+rm /root/ports-domains.txt.xml
+rm /root/sub.txt
+rm /root/subdomains.txt
+rm /root/third-stage-sub.txt
+rm /root/final-sub.txt
