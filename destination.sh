@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mv /root/final-domains.txt $1
+mv /root/target-domains.txt $1
 mv /root/alive-domains.txt $1
 mv /root/ports-domains.txt.nmap $1
 mv /root/wayback-domains.txt $1
