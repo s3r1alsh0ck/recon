@@ -4,7 +4,7 @@ echo "Hi there, :)"
 echo
 echo "Performing Subdomain enumeration...."
 echo
-sublist3r -d $1 -o /root/sub.txt
+python /root/tools/Sublist3r/sublist3r.py -d $1 -o /root/sub.txt
 echo
 curl -s https://certspotter.com/api/v0/certs\?domain\=$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $1 | tee -a /root/sub.txt
 echo
@@ -20,7 +20,7 @@ for domain in $(cat /root/third-stage-sub.txt); do findomain -t $domain -u /root
 echo
 for domain in $(cat /root/third-stage-sub.txt); do curl -s https://certspotter.com/api/v0/certs\?domain\=$domain | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $domain | tee -a /root/subdomains.txt;done
 echo
-for domain in $(cat /root/third-stage-sub.txt); do sublist3r -d $domain -o /root/subdomains.txt;done
+for domain in $(cat /root/third-stage-sub.txt); do python /root/tools/Sublist3r/sublist3r.py -d $domain -o /root/subdomains.txt;done
 echo
 cat /root/subdomains.txt | tee -a /root/sub.txt
 echo
