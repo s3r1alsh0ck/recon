@@ -33,7 +33,7 @@ echo "Looking for wayback urls...."
 cat /root/alive-domains.txt | waybackurls | grep -v -e jpg -e png -e gif -e woff -e woff2 -e ttf -e svg -e jpeg -e css -e ico -e eot | sort -u | tee -a /root/wayback-domains.txt | wc -l
 echo
 echo "Taking screenshots of the target domains...."
-./EyeWitness/Python/EyeWitness.py -f /root/alive-domains.txt -d /root/eyewitness --prepend-https --web
+./tools/EyeWitness/Python/EyeWitness.py -f /root/alive-domains.txt -d /root/eyewitness --prepend-https --web
 echo
 echo "Done!"
 echo
