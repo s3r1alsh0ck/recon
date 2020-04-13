@@ -22,8 +22,8 @@ for domain in $(cat /root/third-stage-sub.txt); do curl -s https://certspotter.c
 echo
 for domain in $(cat /root/third-stage-sub.txt); do python /root/tools/Sublist3r/sublist3r.py -d $domain -o /root/subdomains.txt;done
 echo
-cat /root/sub.old >> sub.txt
-cat /root/subdomains.txt | tee -a /root/sub.txt
+cat /root/sub.old.txt >> /root/sub.txt
+cat /root/subdomains.txt  >> /root/sub.txt
 echo
 cat /root/sub.txt | sort -u | sed 's/<.*//' |  tee -a /root/target-domains.txt
 echo
