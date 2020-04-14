@@ -30,23 +30,23 @@ echo "Select a script to load!"
 read n
 echo 
 echo 
-if [ $n == 1 ] || [ $n == 0]; then
+if [ $n == 1 ]; then
 echo "Looping with subfinder!!" 
 for domain in $(cat /root/third-stage-sub.txt); do subfinder -d $domain -t 100 -o /root/subdomains.txt;done
 echo "Done with looping!!"
 fi
 
-if [ $n == 2 ] || [ $n == 0]; then
+if [ $n == 2 ]; then
 echo "Looping with findomains!!" 
 for domain in $(cat /root/third-stage-sub.txt); do findomain -t $domain -u /root/subdomains.txt;done
 echo "Done with looping!"
 
-if [ $n == 3 ] || [ $n == 0]; then
+if [ $n == 3 ]; then
 echo "Looping with certspotter!!"
 for domain in $(cat /root/third-stage-sub.txt); do curl -s https://certspotter.com/api/v0/certs\?domain\=$domain | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $domain | tee -a /root/subdomains.txt;done
 echo "Done with looping!"
 
-if [ $n == 4 ] || [ $n ==0]; then
+if [ $n == 4 ]; then
 echo "Looping with sublist3r!!"
 for domain in $(cat /root/third-stage-sub.txt); do python /root/tools/Sublist3r/sublist3r.py -d $domain -o /root/subdomains.txt;done
 echo "Done with looping!"
