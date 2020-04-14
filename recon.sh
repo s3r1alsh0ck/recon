@@ -2,6 +2,12 @@
 
 echo "Hi there, :)"
 echo
+echo "Recon process"
+echo "1.Subdomain enumeration"
+echo "2.httprobe"
+echo "3.wayback urls"
+echo "4.Eyewitness"
+echo 
 echo "Performing Subdomain enumeration...."
 echo
 python /root/tools/Sublist3r/sublist3r.py -d $1 -o /root/sub.txt
@@ -13,14 +19,38 @@ echo
 findomain -t $1 -u /root/sub.txt
 echo
 cat /root/sub.txt | grep -Po "(\w+\.\w+\.\w+)$" | sort -u | tee -a /root/third-stage-sub.txt | wc -l
+echo 
+echo "1.subfinder"
+echo "2.findomain"
+echo "3.certspotter"
+echo "4.sublist3r"
+echo "0.ALL THE SCRIPTS [This take more time!!!]"
 echo
-for domain in $(cat /root/third-stage-sub.txt); do subfinder -d $domain -o /root/subdomains.txt;done
-echo
+echo "Select a script to load!"
+read n
+echo 
+echo 
+if [ $n == 1 ] || [ $n == 0]; then
+echo "Looping with subfinder!!" 
+for domain in $(cat /root/third-stage-sub.txt); do subfinder -d $domain -t 100 -o /root/subdomains.txt;done
+echo "Done with looping!!"
+fi
+
+if [ $n == 2 ] || [ $n == 0]; then
+echo "Looping with findomains!!" 
 for domain in $(cat /root/third-stage-sub.txt); do findomain -t $domain -u /root/subdomains.txt;done
-echo
+echo "Done with looping!"
+
+if [ $n == 3 ] || [ $n == 0]; then
+echo "Looping with certspotter!!"
 for domain in $(cat /root/third-stage-sub.txt); do curl -s https://certspotter.com/api/v0/certs\?domain\=$domain | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $domain | tee -a /root/subdomains.txt;done
-echo
+echo "Done with looping!"
+
+if [ $n == 4 ] || [ $n ==0]; then
+echo "Looping with sublist3r!!"
 for domain in $(cat /root/third-stage-sub.txt); do python /root/tools/Sublist3r/sublist3r.py -d $domain -o /root/subdomains.txt;done
+echo "Done with looping!"
+echo
 echo
 cat /root/sub.old.txt >> /root/sub.txt
 cat /root/subdomains.txt  >> /root/sub.txt
