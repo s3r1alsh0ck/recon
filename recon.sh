@@ -60,7 +60,7 @@ then
  for domain in $(cat $1); do python /root/tools/Sublist3r/sublist3r.py -d $domain -o more.subdomains.txt;done
  for domain in $(cat $1); do subfinder -d $domain -t 100 -o more.subdomains.txt;done
  for domain in $(cat $1); do findomain -t $domain -u more.subdomains.txt;done
- for domain in $(cat $1); do curl -s https://certspotter.com/api/v0/certs\?domain\=$domain | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $domain | tee -a more.subdomains.txt;done
+ for domain in $(cat $1); do curl -s https://certspotter.com/api/v0/certs\?domain\=$domain | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $domain | tee -a /root/subdomains.txt;done
  echo
  echo "Done with looping!!!!!"
 fi
